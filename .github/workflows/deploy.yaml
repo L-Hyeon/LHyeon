@@ -1,0 +1,26 @@
+name: Deploy to Server on Push
+
+on:
+  push:
+    branches:
+      - main # 배포할 브랜치 이름
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH key and deploy
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: 192.168.1.11
+          username: root # 서버 유저명으로 변경
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd /docker/LHyeon
+            git pull origin main
+            docker-compose down
+            docker-compose up --build -d
