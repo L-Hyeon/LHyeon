@@ -5,7 +5,7 @@ import path from "path";
 const DATA_DIR =
   process.env.NODE_ENV === "production"
     ? "/data" // 프로덕션 컨테이너 경로
-    : path.join(process.cwd(), "/codeserver/Private"); // 개발 환경 내 프로젝트 data 폴더
+    : "/codeserver/Private"; // 개발 시 경로
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
