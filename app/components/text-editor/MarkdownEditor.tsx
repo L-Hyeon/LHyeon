@@ -18,7 +18,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ value, onChange }) => {
       const [instance] = OverType.init(containerRef.current, {
         value,
         onChange,
-        // toolbar 옵션 제거하여 툴바 없음
+        toolbar: true,
       });
       editorRef.current = instance;
       initializedRef.current = true;
